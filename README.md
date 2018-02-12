@@ -13,3 +13,9 @@ Web 2.0 server for Web 3.0 APM hosted dApps
 
 - Use the docker image to deploy to your hosting service of choice and configure it for your registry
 
+## Roadmap
+
+- v1: HTTP serve contentURI of a given package, for different networks and versions.
+- v2: JSON API
+- v3: DNS gateway like ipfs-gateway, that would allow just running 1 instance of `apm-serve`
+and people being able to serve registries or specific content just by configuring DNS.
