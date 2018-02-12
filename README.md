@@ -1,5 +1,5 @@
 # apm-serve
-Web 2.0 server for Web 3.0 APM hosted websites
+Web 2.0 server for Web 3.0 APM hosted dApps
 
 ## Goal API
 
