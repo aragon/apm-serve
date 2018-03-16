@@ -5,7 +5,8 @@ const app = express()
 const apmRouter = require('./lib/apm-router')
 
 const networks = [
-  { network: 'rinkeby' },  // automagically '*.rinkeby'
+  // TODO: As soon as we start using mainnet we should require rinkeby to be prefixed
+  { network: 'rinkeby', sub: '*' },
   // { network: 'ropsten' },
   // { network: 'kovan' },
   // { network: 'rpc' },
@@ -15,6 +16,7 @@ const networks = [
 // Always check hostname
 app.use((req, res, next) => {
   req.basehost = process.env.HOST || 'aragonpm.dev'
+
   if (req.hostname.indexOf(req.basehost) == -1) {
     console.log('[apm-serve] ERROR: please set correct HOST env variable')
     return res.status(500).send('Incorrect HOST name, please set HOST env var correctly')
@@ -24,7 +26,7 @@ app.use((req, res, next) => {
 })
 
 const routers = networks.map(({ network, sub }) => {
-  return subdomain(sub ? sub : `*.${network}`, apmRouter(network))
+  return subdomain(sub ? sub : `${network}.*`, apmRouter(network))
 })
 
 routers.forEach(router => app.use(router))
