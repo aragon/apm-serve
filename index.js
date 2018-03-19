@@ -15,7 +15,7 @@ const networks = [
 
 // Always check hostname
 app.use((req, res, next) => {
-  req.basehost = process.env.HOST || 'aragonpm.dev'
+  req.basehost = process.env.HOST || 'aragonpm.test'
 
   if (req.hostname.indexOf(req.basehost) == -1) {
     console.log('[apm-serve] ERROR: please set correct HOST env variable')
