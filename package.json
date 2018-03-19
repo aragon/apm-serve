@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/aragon/apm-serve#readme",
   "dependencies": {
-    "@aragon/apm": "^1.0.0-beta.4",
+    "@aragon/apm": "^1.0.0-beta.9",
     "eth-ens-namehash": "^2.0.8",
     "express": "^4.16.2",
     "express-subdomain": "^1.0.5",
