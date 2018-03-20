@@ -17,22 +17,26 @@ const networks = [
 app.use((req, res, next) => {
   req.basehost = process.env.HOST || 'aragonpm.test'
 
-  if (req.hostname.indexOf(req.basehost) == -1) {
-    console.log('[apm-serve] ERROR: please set correct HOST env variable')
-    return res.status(500).send('Incorrect HOST name, please set HOST env var correctly')
-  } else {
-    next()
+  if (req.hostname.indexOf(req.basehost) === -1) {
+    return next(new Error('Incorrect HOST name, please set HOST env variable correctly'))
   }
+  next()
 })
 
-const routers = networks.map(({ network, sub }) => {
-  return subdomain(sub ? sub : `${network}.*`, apmRouter(network))
+const routers = networks.map(({ network, sub }) => {
+  return subdomain(sub || `${network}.*`, apmRouter(network))
 })
 
 routers.forEach(router => app.use(router))
 
-const port = process.env.PORT || 3000
-app.listen(port, err => {
+// Error handler
+app.use(function (err, req, res, next) {
+  console.error('Error', err)
+  res.status(503).send({ error: err.message })
+})
+
+const port = process.env.PORT || 3000
+app.listen(port, (err) => {
   if (err) return console.error(err)
-  console.log('[apm-serve] up and running on port', port)
+  console.log('Listening on port', port)
 })
