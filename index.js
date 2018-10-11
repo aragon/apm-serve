@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 })
 
 const routers = networks.map(({ network, sub }) => {
-  return subdomain(sub || `${network}.*`, apmRouter(network))
+  return subdomain(sub || `*.${network}`, apmRouter(network))
 })
 
 routers.forEach(router => app.use(router))
