@@ -7,15 +7,21 @@ const app = express()
 const apmRouter = require('./lib/apm-router')
 
 const networks = JSON.parse(process.env.APMSERVE_NETWORKS)
+const aliases = JSON.parse(process.env.APMSERVE_ALIASES || '[]')
 
 app.use(require('cors')())
 
 // Always check hostname
 app.use((req, res, next) => {
-  req.basehost = process.env.APMSERVE_HOST
+  req._basehost = process.env.APMSERVE_HOST
 
-  if (req.hostname.indexOf(req.basehost) === -1) {
-    return next(new Error('Incorrect HOST name, please set HOST env variable correctly'))
+  if (req.hostname.indexOf(req._basehost) === -1) {
+    const { target } = aliases.find(({ alias }) => req.hostname === alias) || {}
+    if (target) {
+      req.headers.host = `${target}.${req._basehost}`
+    } else {
+      return next(new Error('Incorrect HOST name, please set HOST env variable correctly'))
+    }
   }
   next()
 })
