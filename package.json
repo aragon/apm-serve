@@ -18,6 +18,7 @@
   "homepage": "https://github.com/aragon/apm-serve#readme",
   "dependencies": {
     "@aragon/apm": "^2.0.0",
+    "compression": "^1.7.3",
     "cors": "^2.8.4",
     "eth-ens-namehash": "^2.0.8",
     "express": "^4.16.2",

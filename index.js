@@ -1,5 +1,5 @@
-const subdomain = require('express-subdomain')
 const express = require('express')
+const subdomain = require('express-subdomain')
 const app = express()
 
 const apmRouter = require('./lib/apm-router')
@@ -14,6 +14,7 @@ const networks = [
 ]
 
 app.use(require('cors')())
+app.use(require('compression')())
 
 // Always check hostname
 app.use((req, res, next) => {
