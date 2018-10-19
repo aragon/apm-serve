@@ -31,6 +31,7 @@ const routers = networks.map(({ network, sub }) => {
   return subdomain(sub || `*.${network}`, apmRouter(network))
 })
 
+app.set("subdomain offset", process.env.APMSERVE_HOST.split('.').length)
 routers.forEach(router => app.use(router))
 
 // Error handler
