@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/aragon/apm-serve.git"
   },
-  "author": "Aragon Institution MTU",
+  "author": "Aragon Association <legal@aragon.org>",
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/aragon/apm-serve/issues"
