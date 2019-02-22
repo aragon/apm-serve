@@ -36,7 +36,7 @@ app.set("subdomain offset", process.env.APMSERVE_HOST.split('.').length)
 routers.forEach(router => app.use(router))
 
 app.use(function (req, res, next) {
-  res.status(404).send('Not found. Maybe you are looking for https://aragon.rinkeby.aragonpm.com')
+  res.status(404).send('Not found. Maybe you are looking for https://aragon.rinkeby.aragonpm.com?')
 })
 
 // Error handler
