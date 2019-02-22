@@ -9,6 +9,7 @@ const apmRouter = require('./lib/apm-router')
 const networks = JSON.parse(process.env.APMSERVE_NETWORKS)
 const aliases = JSON.parse(process.env.APMSERVE_ALIASES || '[]')
 
+app.use(require('helmet')())
 app.use(require('cors')())
 app.use(require('compression')())
 
