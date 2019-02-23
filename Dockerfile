@@ -13,4 +13,4 @@ COPY package.json /usr/src/app/
 RUN npm install --production && npm cache clean --force
 COPY . /usr/src/app
 
-CMD [ "npm", "start:production" ]
+CMD [ "npm", "run", "start:production" ]
