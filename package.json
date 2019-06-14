@@ -6,8 +6,8 @@
   "scripts": {
     "start": "nodemon -q index.js",
     "docker:build": "docker build --no-cache -t aragon/apm-serve .",
-    "docker:start": "docker run -p 5001:8080 -ti aragon/apm-serve",
-    "docker:start:test": "docker run -p 5001:8080 -e APMSERVE_HOST=aragonpm.test -ti aragon/apm-serve"
+    "docker:start": "docker run -p 5001:8080 -p 5002:8081 -ti aragon/apm-serve",
+    "docker:start:test": "docker run -p 5001:8080 -p 5002:8081 -e APMSERVE_HOST=aragonpm.test -ti aragon/apm-serve"
   },
   "repository": {
     "type": "git",
