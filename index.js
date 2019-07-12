@@ -1,6 +1,8 @@
 require('dotenv').config()
 
 const express = require('express')
+const { createMiddleware, signalIsUp } = require('@promster/express');
+const { createServer } = require('@promster/server');
 const subdomain = require('express-subdomain')
 const app = express()
 
@@ -9,6 +11,8 @@ const apmRouter = require('./lib/apm-router')
 const networks = JSON.parse(process.env.APMSERVE_NETWORKS)
 const aliases = JSON.parse(process.env.APMSERVE_ALIASES || '[]')
 
+// Instrument with prometheus metrics
+app.use(createMiddleware({ app }));
 app.use(require('cors')())
 app.use(require('compression')())
 
@@ -47,5 +51,11 @@ app.use(function (err, req, res, next) {
 const port = process.env.PORT || 3000
 app.listen(port, (err) => {
   if (err) return console.error(err)
+  signalIsUp()
   console.log(`Listening on port ${port} (host: ${process.env.APMSERVE_HOST})`)
 })
+
+const metricsPort = process.env.METRICS_PORT || 3001
+createServer({ port: metricsPort }).then(server =>
+  console.log(`@promster/server started on port ${metricsPort}.`)
+);
