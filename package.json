@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -q index.js",
-    "start:forever": "pm2 start index.js",
     "docker:build": "docker build --no-cache -t aragon/apm-serve .",
-    "docker:start": "docker run -p 5001:8080 -ti aragon/apm-serve -e \"NODE_ENV=production\"",
-    "docker:start:test": "docker run -p 5001:8080 -e APMSERVE_HOST=aragonpm.test -ti aragon/apm-serve"
+    "docker:start": "docker run -p 5001:8080 -p 5002:8081 -ti aragon/apm-serve -e \"NODE_ENV=production\"",
+    "docker:start:test": "docker run -p 5001:8080 -p 5002:8081 -e APMSERVE_HOST=aragonpm.test -ti aragon/apm-serve"
   },
   "repository": {
     "type": "git",
@@ -22,6 +21,8 @@
   "homepage": "https://github.com/aragon/apm-serve#readme",
   "dependencies": {
     "@aragon/apm": "^3.0.0",
+    "@promster/express": "^2.2.2",
+    "@promster/server": "^2.1.1",
     "compression": "^1.7.3",
     "cors": "^2.8.4",
     "dotenv": "^6.1.0",
@@ -29,8 +30,8 @@
     "express": "^4.16.2",
     "express-subdomain": "^1.0.5",
     "helmet": "^3.15.1",
+    "ipfs-api": "^17.5.0",
     "nodemon": "^1.17.2",
-    "pm2": "^3.3.1",
-    "web3": "^1.0.0-beta.30"
+    "web3": "1.0.0-beta.37"
   }
 }
