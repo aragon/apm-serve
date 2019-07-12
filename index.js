@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const express = require('express')
-const { createMiddleware } = require('@promster/express');
+const { createMiddleware, signalIsUp } = require('@promster/express');
 const { createServer } = require('@promster/server');
 const subdomain = require('express-subdomain')
 const app = express()
@@ -51,6 +51,7 @@ app.use(function (err, req, res, next) {
 const port = process.env.PORT || 3000
 app.listen(port, (err) => {
   if (err) return console.error(err)
+  signalIsUp()
   console.log(`Listening on port ${port} (host: ${process.env.APMSERVE_HOST})`)
 })
 
