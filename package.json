@@ -4,7 +4,8 @@
   "description": "Web 2.0 server for Web 3.0 APM hosted dApps",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -q index.js",
+    "start": "NODE_ENV=production node index.js",
+    "start:dev": "nodemon -q index.js",
     "docker:build": "docker build --no-cache -t aragon/apm-serve .",
     "docker:start": "docker run -p 5001:8080 -p 5002:8081 -ti aragon/apm-serve",
     "docker:start:test": "docker run -p 5001:8080 -p 5002:8081 -e APMSERVE_HOST=aragonpm.test -ti aragon/apm-serve"
@@ -20,7 +21,7 @@
   },
   "homepage": "https://github.com/aragon/apm-serve#readme",
   "dependencies": {
-    "@aragon/apm": "^2.0.2",
+    "@aragon/apm": "^3.0.0",
     "@promster/express": "^2.2.2",
     "@promster/server": "^2.1.1",
     "compression": "^1.7.3",
@@ -29,8 +30,9 @@
     "eth-ens-namehash": "^2.0.8",
     "express": "^4.16.2",
     "express-subdomain": "^1.0.5",
+    "helmet": "^3.15.1",
     "ipfs-api": "^17.5.0",
     "nodemon": "^1.17.2",
-    "web3": "^1.0.0-beta.30"
+    "web3": "1.0.0-beta.37"
   }
 }
